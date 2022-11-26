@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-from account_app.models import Account
+from main.settings import AUTH_USER_MODEL
 
 
 class Category(models.Model):
@@ -46,7 +46,7 @@ class Event(models.Model):
     description = models.TextField(verbose_name="Чему вы научитесь?")
     about = models.TextField(verbose_name="О программе")
     speakers_detail = models.ManyToManyField(Speaker, verbose_name='Спикеры', blank=True, related_name='speakers_detail')
-    user = models.ForeignKey(Account, verbose_name='Владелец', on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Владелец', on_delete=models.CASCADE)
     number_for_seats = models.IntegerField(verbose_name='Количество мест')
 
     class Meta:
@@ -64,7 +64,7 @@ class Registered(models.Model):
     """Registered"""
     event = models.ForeignKey(Event, verbose_name='Мероприятие', on_delete=models.SET_NULL,
                               related_name='people_count', null=True, blank=True)
-    user = models.ForeignKey(Account, verbose_name='Участник', on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Участник', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Участник"
