@@ -59,10 +59,10 @@ class MyUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('fullname', 'date_joined')
+    list_display = ('email', 'fullname', 'date_joined')
     list_filter = ('position',)
     fieldsets = (
-        (None, {'fields': ('profile_image', 'position', 'description', 'organisation', 'date_joined')}),
+        (None, {'fields': ('fullname', 'profile_image', 'position', 'organisation', 'date_joined')}),
         ("Personal info", {"fields": ("email", "password")}),
         ('Permissions', {'fields': (
             "is_active",

@@ -1,21 +1,8 @@
-from rest_framework import viewsets, views
-from rest_framework.authtoken.models import Token
+from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
 from account_app.models import Account
-from account_app.serializers import AccountSerializer, LoginSerializer
-
-
-class AccountRegisterAPIViews(views.APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = AccountSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        token = Token.objects.create(user=user)
-        return Response({'token': str(token.key)}, status=201)
 
 
 class LoginView(views.APIView):
@@ -37,6 +24,4 @@ class LoginView(views.APIView):
         pass_check = user.check_password(password)
         if not pass_check:
             return Response('Неверный пароль и/или email', status=400)
-        token = Token.objects.get(user=user)
-        return Response({'token': str(token.key)}, status=201)
-
+        return Response('Hello', status=201)

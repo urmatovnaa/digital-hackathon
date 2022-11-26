@@ -26,10 +26,3 @@ class AccountSerializer(serializers.ModelSerializer):
         )
         return user
 
-
-class LoginSerializer(serializers.ModelSerializer):
-    """ Login for my users """
-    class Meta:
-        model = Account
-        fields = ['email', 'password']
-
