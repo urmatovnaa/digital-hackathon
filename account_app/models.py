@@ -16,7 +16,7 @@ class Account(AbstractUser):
                                 verbose_name='ФИО')
     email = models.EmailField(unique=True)
     position = models.CharField(max_length=100,
-                                verbose_name='Позиция')
+                                verbose_name='Должность')
     organisation = models.CharField(max_length=100,
                                     verbose_name='Организация')
     profile_image = models.ImageField(upload_to='avatar',
@@ -30,6 +30,7 @@ class Account(AbstractUser):
     objects = MyAccountManager()
 
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     class Meta:
         verbose_name = 'Пользователь'
