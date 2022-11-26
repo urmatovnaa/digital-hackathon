@@ -35,6 +35,9 @@ class Account(AbstractUser):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
+    def clean(self):
+        self.fullname = self.fullname.capitalize()
+
     def __str__(self):
         return f'{self.fullname}'
 
