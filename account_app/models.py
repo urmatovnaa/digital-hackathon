@@ -40,5 +40,4 @@ class Account(AbstractUser):
         self.fullname = self.fullname.capitalize()
 
     def __str__(self):
-        return f'{self.fullname}'
-
+        return f'{self.email}'
