@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # my apps
     'account_app',
     'event_app',
+    'question_app'
 ]
 
 MIDDLEWARE = [
