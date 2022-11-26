@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from event_app.models import Speaker, Event, Registered
-from event_app.serializers import SpeakersSerializer, EventsSerializer, EventsDetailSerializer, \
+from event_app.models import Event, Registered
+from event_app.serializers import EventsSerializer, EventsDetailSerializer, \
     RegisteredSerializer
 
 
