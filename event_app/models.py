@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from account_app.models import Account
 
 
 class Category(models.Model):
@@ -17,7 +18,7 @@ class Category(models.Model):
         return self.name
 
 
-class Speakers(models.Model):
+class Speaker(models.Model):
     """Info about speakers"""
     fullname = models.CharField(verbose_name="ФИО", max_length=255)
     position = models.CharField(verbose_name="Должность", max_length=255)
@@ -28,13 +29,13 @@ class Speakers(models.Model):
         verbose_name_plural = "Спикеры"
 
     def clean(self):
-        self.name = self.name.capitalize()
+        self.fullname = self.fullname.capitalize()
 
     def __str__(self):
-        return self.name
+        return self.fullname
 
 
-class Events(models.Model):
+class Event(models.Model):
     """Information about Events"""
     name = models.CharField(verbose_name='Название', max_length=255, unique=True)
     data = datetime.now()
@@ -44,7 +45,9 @@ class Events(models.Model):
     time = models.CharField(verbose_name='Время', max_length=255)
     description = models.TextField(verbose_name="Чему вы научитесь?")
     about = models.TextField(verbose_name="О программе")
-    speaker = models.ManyToManyField(Speakers, verbose_name='Спикеры', blank=True)
+    speakers_detail = models.ManyToManyField(Speaker, verbose_name='Спикеры', blank=True, related_name='speakers_detail')
+    user = models.ForeignKey(Account, verbose_name='Владелец', on_delete=models.CASCADE)
+    number_for_seats = models.IntegerField(verbose_name='Количество мест')
 
     class Meta:
         verbose_name = "Мероприятие"
@@ -55,4 +58,18 @@ class Events(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Registered(models.Model):
+    """Registered"""
+    event = models.ForeignKey(Event, verbose_name='Мероприятие', on_delete=models.SET_NULL,
+                              related_name='people_count', null=True, blank=True)
+    user = models.ForeignKey(Account, verbose_name='Участник', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Участник"
+        verbose_name_plural = "Участники"
+
+    def __str__(self):
+        return f'{self.event}'
 
