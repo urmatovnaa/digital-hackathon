@@ -33,5 +33,5 @@ class MyAccountManager(BaseUserManager):
 
 
 def get_default_profile_image():
-    return "default/default_profile_image.jpeg"
+    return "default/default_profile_image.jpg"
 
