@@ -3,7 +3,7 @@ from event_app.views import EventsViewSet, EventsDetailViewSet, RegisteredViewSe
 
 urlpatterns = [
     path('', EventsViewSet.as_view({'get': 'list', })),
-    path('create/', EventsViewSet.as_view({'post': 'create'})),
+    path('create/', EventsDetailViewSet.as_view({'post': 'create'})),
     path('<int:pk>/', EventsDetailViewSet.as_view(
         {'get': 'retrieve'}
     )),

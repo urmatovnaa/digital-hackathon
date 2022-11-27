@@ -12,7 +12,6 @@ from event_app.serializers import EventsSerializer, EventsDetailSerializer, \
 from question_app.permissions import IsAuthorPermission
     
 
-
 class EventsViewSet(ModelViewSet):
     serializer_class = EventsSerializer
     queryset = Event.objects.all()
@@ -30,12 +29,10 @@ class EventsDetailViewSet(ModelViewSet):
     search_fields = ['name']
     ordering_fields = ['data']
     filterset_fields = ['category']
+    queryset = Event.objects.all()
 
-    def get_queryset(self):
-        queruset = Event.objects.annotate(
-            counting=Count('people_count')
-        ).order_by('-id')
-        return queruset
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class RegisteredViewSet(APIView):

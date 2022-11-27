@@ -11,7 +11,7 @@ class Article(models.Model):
     data = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
     photo = models.ImageField(upload_to='article_photo', verbose_name='Фото')
     description = models.TextField(verbose_name='Описание')
-    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Владелец', on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Владелец', on_delete=models.SET_NULL,null=True)
 
     class Meta:
         verbose_name = "Статья"
