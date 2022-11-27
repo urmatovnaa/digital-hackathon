@@ -38,7 +38,7 @@ class EventsDetailSerializer(serializers.ModelSerializer):
         model = Event
         fields = ['id', 'name', 'data', 'photo', 'category', 'time', 'description', 'about',
                   'speakers_detail',
-                  'user', 'number_for_seats', 'counting']
+                  'user', 'number_for_seats', 'counting', 'category']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)

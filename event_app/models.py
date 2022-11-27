@@ -38,8 +38,8 @@ class Speaker(models.Model):
 class Event(models.Model):
     """Information about Events"""
     name = models.CharField(verbose_name='Название', max_length=255, unique=True)
-    data = datetime.now()
-    photo = models.ImageField(upload_to='event_photo')
+    data = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    photo = models.ImageField(upload_to='event_photo', verbose_name='Фото')
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.SET_NULL,
                                  null=True, blank=True)
     time = models.CharField(verbose_name='Время', max_length=255)
