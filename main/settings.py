@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'event_app',
     'question_app',
     'article_app',
+    'course_app',
 ]
 
 MIDDLEWARE = [
