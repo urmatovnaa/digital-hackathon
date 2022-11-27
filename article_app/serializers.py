@@ -11,9 +11,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
-    user_photo = serializers.ImageField()
+    user_photo = serializers.ImageField(read_only=True)
 
     class Meta:
         model = Article
-        fields = ['id', 'name', 'user_photo', 'data', 'photo', 'description']
+        fields = ['id', 'name', 'user_photo', 'data', 'photo', 'description', 'category']
 

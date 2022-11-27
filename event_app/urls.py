@@ -8,4 +8,4 @@ urlpatterns = [
         {'get': 'retrieve'}
     )),
     path('<int:event_pk>/like/', RegisteredViewSet.as_view()),
-    ]
+]

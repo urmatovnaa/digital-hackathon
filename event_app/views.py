@@ -6,10 +6,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from event_app.models import Event, Registered
+from event_app.models import Event, Registered, Category
 from event_app.serializers import EventsSerializer, EventsDetailSerializer, \
-    RegisteredSerializer
+    RegisteredSerializer, CategorySerializer
 from question_app.permissions import IsAuthorPermission
+    
 
 
 class EventsViewSet(ModelViewSet):
@@ -55,3 +56,12 @@ class RegisteredViewSet(APIView):
         else:
             Registered.objects.create(event_id=event_pk, user=request.user)
             return Response({'success': 'Записаться'})
+
+
+class CategoryViewSet(ModelViewSet):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    search_fields = ['name']
+    ordering_fields = ['data']
+    filterset_fields = ['category']
