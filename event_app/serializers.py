@@ -39,12 +39,3 @@ class EventsDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'data', 'photo', 'category', 'time', 'description', 'about',
                   'speakers_detail',
                   'user', 'number_for_seats', 'counting', 'category']
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['last_seats'] = (response['number_for_seats']) - (response['counting'])
-        people = response['speakers_detail']
-        users = self.context['view'].request.user.id
-        if users in people:
-            response['Записаться'] = True
-        return response
