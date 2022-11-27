@@ -36,6 +36,7 @@ class EventsDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
+<<<<<<< HEAD
         fields = '__all__'
         extra_kwargs = {
             'user': {'read_only': True}
@@ -47,3 +48,8 @@ class EventsDetailSerializer(serializers.ModelSerializer):
         response['last_seats'] = (response['number_for_seats']) - len(response['people_count'])
         print(response['last_seats'])
         return response
+=======
+        fields = ['id', 'name', 'data', 'photo', 'category', 'time', 'description', 'about',
+                  'speakers_detail',
+                  'user', 'number_for_seats', 'counting', 'category']
+>>>>>>> main
