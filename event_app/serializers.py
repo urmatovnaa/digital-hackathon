@@ -31,11 +31,25 @@ class EventsSerializer(serializers.ModelSerializer):
 
 
 class EventsDetailSerializer(serializers.ModelSerializer):
-    counting = serializers.IntegerField()
-    speakers_detail = SpeakersSerializer(many=True)
+    people_count = RegisteredSerializer(read_only=True, many=True)
+    speakers_detail = SpeakersSerializer(read_only=True, many=True)
 
     class Meta:
         model = Event
+<<<<<<< HEAD
+        fields = '__all__'
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        print(response)
+        response['last_seats'] = (response['number_for_seats']) - len(response['people_count'])
+        print(response['last_seats'])
+        return response
+=======
         fields = ['id', 'name', 'data', 'photo', 'category', 'time', 'description', 'about',
                   'speakers_detail',
                   'user', 'number_for_seats', 'counting', 'category']
+>>>>>>> main

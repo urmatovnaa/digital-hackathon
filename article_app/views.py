@@ -1,13 +1,12 @@
 from django.db.models import F
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
+
 from rest_framework.viewsets import ModelViewSet
 
 from article_app.models import Article
 from article_app.serializers import ArticleSerializer, ArticleDetailSerializer
+from question_app.permissions import IsAuthorPermission
 
 
 class ArticleViewSet(ModelViewSet):
@@ -16,6 +15,7 @@ class ArticleViewSet(ModelViewSet):
     search_fields = ['name']
     ordering_fields = ['data']
     filterset_fields = ['category']
+    permission_classes = (IsAuthorPermission,)
 
     def get_queryset(self):
         queryset = Article.objects.annotate(
@@ -30,6 +30,7 @@ class ArticleDetailViewSet(ModelViewSet):
     search_fields = ['name']
     ordering_fields = ['data']
     filterset_fields = ['category']
+    permission_classes = (IsAuthorPermission,)
 
     def get_queryset(self):
         queryset = Article.objects.annotate(

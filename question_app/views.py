@@ -7,12 +7,13 @@ from rest_framework.permissions import IsAuthenticated
 
 from question_app.serializers import QuestionSerializer, AnswerSerializer, QuestionDetailSerializer
 from question_app.models import Question, Answer
+from question_app.permissions import IsAuthorPermission
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
     """ Добавление вопроса"""
     serializer_class = QuestionSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthorPermission,)
     serializer_classes = {
         'retrieve': QuestionDetailSerializer,
     }
@@ -27,7 +28,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class AnswerViewSet(viewsets.ModelViewSet):
     """ Вывод вопрос и ответа"""
     serializer_class = AnswerSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthorPermission,)
     lookup_field = 'question_pk'
     queryset = Answer.objects.all()
 

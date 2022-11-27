@@ -9,7 +9,8 @@ from rest_framework.viewsets import ModelViewSet
 from event_app.models import Event, Registered, Category
 from event_app.serializers import EventsSerializer, EventsDetailSerializer, \
     RegisteredSerializer, CategorySerializer
-
+from question_app.permissions import IsAuthorPermission
+    
 
 class EventsViewSet(ModelViewSet):
     serializer_class = EventsSerializer
@@ -18,21 +19,20 @@ class EventsViewSet(ModelViewSet):
     search_fields = ['name']
     ordering_fields = ['data']
     filterset_fields = ['category']
+    permission_classes = (IsAuthorPermission,)
 
 
 class EventsDetailViewSet(ModelViewSet):
     serializer_class = EventsDetailSerializer
-    # permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthorPermission, ]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['name']
     ordering_fields = ['data']
     filterset_fields = ['category']
+    queryset = Event.objects.all()
 
-    def get_queryset(self):
-        queruset = Event.objects.annotate(
-            counting=Count('people_count')
-        ).order_by('-id')
-        return queruset
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class RegisteredViewSet(APIView):
