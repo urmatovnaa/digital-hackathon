@@ -4,8 +4,8 @@ from event_app.models import Speaker, Category
 
 class Course(models.Model):
     """Info about speakers"""
-    TIME_STUDY_CHOICES = ((1, 'оффлайн'), (2, 'онлайн'),)
-    CERTIFICATE_CHOICES = ((1, 'есть'), (2, 'нет'),)
+    TIME_STUDY_CHOICES = (('оффлайн', 'оффлайн'), ('онлайн', 'онлайн'),)
+    CERTIFICATE_CHOICES = (('есть', 'есть'), ('нет', 'нет'),)
     name = models.CharField(verbose_name='Название', max_length=255, unique=True)
     photo = models.ImageField(upload_to='course_photo', verbose_name='Фото')
     time_study = models.CharField(verbose_name='Формат обучения', choices=TIME_STUDY_CHOICES, default=1,
