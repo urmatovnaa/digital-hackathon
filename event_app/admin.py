@@ -3,15 +3,15 @@ from event_app.models import Category, Speaker, Event
 
 
 @admin.register(Category)
-class ContactsAdmin(admin.ModelAdmin):
+class Contacts1Admin(admin.ModelAdmin):
     pass
 
 
 @admin.register(Speaker)
-class ContactsAdmin(admin.ModelAdmin):
+class Contacts2Admin(admin.ModelAdmin):
     pass
 
 
 @admin.register(Event)
-class ContactsAdmin(admin.ModelAdmin):
+class Contacts3Admin(admin.ModelAdmin):
     pass

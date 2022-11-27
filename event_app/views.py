@@ -9,6 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 from event_app.models import Event, Registered
 from event_app.serializers import EventsSerializer, EventsDetailSerializer, \
     RegisteredSerializer
+from question_app.permissions import IsAuthorPermission
 
 
 class EventsViewSet(ModelViewSet):
@@ -18,11 +19,12 @@ class EventsViewSet(ModelViewSet):
     search_fields = ['name']
     ordering_fields = ['data']
     filterset_fields = ['category']
+    permission_classes = (IsAuthorPermission,)
 
 
 class EventsDetailViewSet(ModelViewSet):
     serializer_class = EventsDetailSerializer
-    # permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthorPermission, ]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['name']
     ordering_fields = ['data']
