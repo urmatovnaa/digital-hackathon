@@ -8,8 +8,8 @@ class Article(models.Model):
     """Info about article"""
     name = models.CharField(verbose_name='Название', max_length=255)
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, blank=True, null=True)
-    data = datetime.now()
-    photo = models.ImageField(upload_to='article_photo')
+    data = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    photo = models.ImageField(upload_to='article_photo', verbose_name='Фото')
     description = models.TextField(verbose_name='Описание')
     user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Владелец', on_delete=models.CASCADE)
 
