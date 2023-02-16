@@ -1,5 +1,5 @@
 # AkylUp
-Let's go digital hackathon
+Let's go digital hackathon 24h
 
 Тема: "Сближение государства и граждан через
 цифровые технологии"
